@@ -8,13 +8,72 @@
 -->
 <html>
   <head>
-    <title>YouTube</title>
-    <meta charset="UTF-8">
+    <title>Polymer YouTube Sample</title>
+    <!-- 1. load platform... -->
     <script src="components/platform/platform.js"></script>
+    <!-- 2. import elements et al. -->
+    <link rel="import" href="components/polymer-ajax/polymer-ajax.html">
+    <link rel="import" href="components/polymer-selector/polymer-selector.html">
+    <link rel="import" href="components/polymer-ui-scaffold/polymer-ui-scaffold.html">
+    <link rel="import" href="components/yt-search/yt-search.html"/>
+    <link rel="import" href="components/yt-video/yt-video.html"/>
     <link rel="stylesheet" href="components/polymer-ui-elements/basic.css">
-    <link rel="import" href="src/yt-app.html">
+    <link rel="stylesheet" href="style.css">
   </head>
-  <body class="polymer-ui-full-bleed">
-    <yt-app class="polymer-ui-fit"></yt-app>
+  <body unresolved>
+    <!-- 3. use the stuff! -->
+    <polymer-ui-scaffold id="scaffold" class="polymer-ui-fit polymer-ui-body-text" menuActive>
+      <div navigation>
+        <polymer-ui-toolbar theme="polymer-ui-dark-theme">
+          <input id="input" value="chrome commercial" x-webkit-speech autofocus></input>
+        </polymer-ui-toolbar>
+        <yt-search id="search"></yt-search>
+        <polymer-selector id="selector"></polymer-selector>
+      </div>
+      <div tool id="title"></div>
+      <yt-video id="video" main class="polymer-ui-fit"></yt-video>
+    </polymer-ui-scaffold>
+    <script>
+      document.addEventListener('WebComponentsReady', function() {
+        // get some references in a polyfill friendly way.
+        var input = document.getElementById('input');
+        var search = document.getElementById('search');
+        var selector = document.getElementById('selector');
+        var title = document.getElementById('title');
+        var video = document.getElementById('video');
+        var scaffold = document.getElementById('scaffold');
+
+        // set the search query based on user input
+        input.addEventListener('input', function(e) {
+          search.query = e.target.value;
+          selector.selected = null;
+        });
+        search.query = input.value;
+
+        // set the list template's model to the search response
+        search.addEventListener('yt-search-result', function(e) {
+          selector.textContent = '';
+          var list = e.target.list;
+          if (list) {
+            var frag = document.createDocumentFragment();
+            for (var i=0, d; i < list.length; i++) {
+              d = document.createElement('div');
+              d.classList.add('item');
+              d.textContent = list[i].title.$t;
+              frag.appendChild(d);
+            }
+            selector.appendChild(frag);
+          }
+        });
+
+        // set the video based on user selection in the list
+        selector.addEventListener('polymer-activate', function(e) {
+          var item = search.list[selector.selected];
+          video.videoEntry = item;
+          title.textContent = item.title.$t;
+          scaffold.menuActive = !scaffold.menuActive;
+        });
+      });
+    </script>
   </body>
 </html>

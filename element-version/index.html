@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+/*
+ * Copyright 2013 The Polymer Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style
+ * license that can be found in the LICENSE file.
+ */
+-->
+<html>
+  <head>
+    <title>Polymer YouTube Sample</title>
+    <!-- 1. load platform... -->
+    <script src="components/platform-dev/platform.js"></script>
+    <!-- 2. import elements et al. -->
+    <link rel="import" href="components/polymer-ajax/polymer-ajax.html">
+    <link rel="import" href="components/polymer-selector/polymer-selector.html">
+    <link rel="import" href="components/polymer-ui-scaffold/polymer-ui-scaffold.html">
+    <link rel="import" href="components/yt-search/yt-search.html"/>
+    <link rel="import" href="components/yt-video/yt-video.html"/>
+    <link rel="stylesheet" href="components/polymer-ui-elements/basic.css">
+  </head>
+  <body unresolved>
+    <!-- 3. make an element! -->
+    <polymer-element name="yt-app">
+      <template>
+        <link rel="stylesheet" href="yt-app.css">
+        <polymer-ui-scaffold class="polymer-ui-fit" menuActive?="{{!video}}" on-polymer-grid-layout="{{gridLayoutAction}}">
+          <div navigation>
+            <polymer-ui-toolbar theme="polymer-ui-dark-theme">
+              <input id="input" value="{{query}}" x-webkit-speech></input>
+            </polymer-ui-toolbar>
+            <yt-search id="search" query="{{query}}" list="{{list}}"></yt-search>
+            <polymer-selector id="selector" selectedModel="{{video}}">
+              <template repeat="{{list}}">
+                <div class="item">{{title.$t}}</div>
+              </template>
+            </polymer-selector>
+          </div>
+          <div tool>
+            <template if="{{selectedVideo}}">
+              {{selectedVideo.title.$t}}
+            </template>
+          </div>
+          <yt-video main videoEntry="{{selectedVideo}}" class="polymer-ui-fit"></yt-video>
+        </polymer-ui-scaffold>
+      </template>
+      <script>
+        Polymer('yt-app', {
+          query: 'chrome commercial',
+          queryChanged: function() {
+            this.$.selector.selected = null;
+          },
+          gridLayoutAction: function() {
+            this.$.input.focus();
+          },
+          videoChanged: function() {
+            if (this.video) {
+              this.selectedVideo = this.video;
+            }
+          }
+        });
+      </script>
+    </polymer-element>
+
+    <!-- 4. use it! -->
+    <yt-app class="polymer-ui-fit polymer-ui-body-text"></yt-app>
+  </body>
+</html>

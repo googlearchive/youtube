@@ -9,6 +9,11 @@
     "yt-search": "Polymer/yt-search#master",
     "yt-video": "Polymer/yt-video#master",
     "speech-mic": "Polymer/speech-mic#master",
-    "polymer-ui-scaffold": "Polymer/polymer-ui-scaffold#master"
+    "polymer-ui-scaffold": "Polymer/polymer-ui-scaffold#master",
+    "polymer-ui-elements": "~0.0.20131108"
+  },
+  "resolutions": {
+    "platform": "master",
+    "polymer": "master"
   }
 }

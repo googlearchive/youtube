@@ -9,6 +9,7 @@
     "yt-search": "Polymer/yt-search#master",
     "yt-video": "Polymer/yt-video#master",
     "speech-mic": "Polymer/speech-mic#master",
-    "polymer-ui-scaffold": "Polymer/polymer-ui-scaffold#master"
+    "polymer-ui-scaffold": "Polymer/polymer-ui-scaffold#master",
+    "polymer-ui-base-css": "Polymer/polymer-ui-base-css#master"
   }
 }

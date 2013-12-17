@@ -31,7 +31,7 @@
   min-height: 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  background: #333 url(../images/ribbon_bg.png) repeat-y;
+  background: #333;
 }
 
 input {

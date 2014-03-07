@@ -2,14 +2,15 @@
   "name": "youtube",
   "private": true,
   "dependencies": {
-    "platform": "Polymer/platform#master",
-    "polymer-ui-toolbar": "Polymer/polymer-ui-toolbar#master",
-    "polymer-ajax": "Polymer/polymer-ajax#master",
-    "polymer-selector": "Polymer/polymer-selector#master",
-    "yt-search": "Polymer/yt-search#master",
-    "yt-video": "Polymer/yt-video#master",
-    "speech-mic": "Polymer/speech-mic#master",
-    "polymer-ui-scaffold": "Polymer/polymer-ui-scaffold#master",
-    "polymer-ui-base": "Polymer/polymer-ui-base#master"
-  }
+    "platform": "Polymer/platform#0.2.1",
+    "polymer-ui-toolbar": "Polymer/polymer-ui-toolbar#0.2.1",
+    "polymer-ajax": "Polymer/polymer-ajax#0.2.1",
+    "polymer-selector": "Polymer/polymer-selector#0.2.1",
+    "yt-search": "Polymer/yt-search#0.2.1",
+    "yt-video": "Polymer/yt-video#0.2.1",
+    "speech-mic": "Polymer/speech-mic#0.2.1",
+    "polymer-ui-scaffold": "Polymer/polymer-ui-scaffold#0.2.1",
+    "polymer-ui-base": "Polymer/polymer-ui-base#0.2.1"
+  },
+  "version": "0.2.1"
 }
